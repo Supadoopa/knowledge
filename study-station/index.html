@@ -8,8 +8,19 @@
 </head>
 <body>
   <header>
-    <h1>📚 Ellie's Study Station</h1>
-    <p class="subtitle">Year 7 Queensland Exam Prep</p>
+    <div class="header-main">
+      <h1>📚 Ellie's Study Station</h1>
+      <p class="subtitle">Year 7 Queensland Exam Prep</p>
+    </div>
+    <div class="header-tools">
+      <div class="countdown-widget" id="exam-countdown-widget" title="Days until Japanese exam"></div>
+      <div class="timer-widget">
+        <span id="timer-display">25:00</span>
+        <button id="timer-btn" onclick="timerToggle()">▶</button>
+        <button onclick="timerReset()" title="Reset timer">↺</button>
+      </div>
+      <button class="dark-toggle" id="dark-toggle-btn" onclick="toggleDark()" title="Toggle dark mode">🌙</button>
+    </div>
   </header>
 
   <nav class="subject-nav">
@@ -22,7 +33,7 @@
   <main>
     <!-- JAPANESE -->
     <section id="japanese" class="subject-section active">
-      <div class="exam-badge">Exam: 25th March</div>
+      <div class="exam-badge" id="jp-exam-badge">Exam: 25th March</div>
       <h2>Japanese — Hiragana</h2>
       <p class="topic-intro">Master Hiragana reading, vocabulary, and English meanings.</p>
 
@@ -30,6 +41,7 @@
         <button class="tab-btn active" data-tab="jp-flashcards">Flashcards</button>
         <button class="tab-btn" data-tab="jp-vocab">Vocab List</button>
         <button class="tab-btn" data-tab="jp-quiz">Quiz</button>
+        <button class="tab-btn" data-tab="jp-typein">Type-in</button>
       </div>
 
       <div id="jp-flashcards" class="tab-content active">
@@ -38,16 +50,31 @@
             <div class="card-front" id="jp-front"></div>
             <div class="card-back" id="jp-back"></div>
           </div>
-          <p class="flip-hint">Click card to flip</p>
+          <p class="flip-hint">Click card to flip &nbsp;|&nbsp; ← → keys to navigate &nbsp;|&nbsp; Space to flip</p>
           <div class="card-controls">
             <button onclick="prevCard('jp')">← Prev</button>
             <span id="jp-counter"></span>
             <button onclick="nextCard('jp')">Next →</button>
           </div>
+          <div class="leitner-controls">
+            <button class="leitner-btn still" onclick="markCard('jp', false)">✗ Still Learning</button>
+            <button class="leitner-btn got" onclick="markCard('jp', true)">✓ Got It!</button>
+          </div>
+          <div class="mastery-row">
+            <div class="mastery-bar"><div class="mastery-fill" id="jp-mastery-fill"></div></div>
+            <span class="mastery-text" id="jp-mastery-text">0 mastered</span>
+          </div>
+          <div class="flashcard-extra-controls">
+            <button class="shuffle-btn" onclick="shuffleDeck('jp')">🔀 Shuffle</button>
+            <button class="reset-mastery-btn" onclick="resetMastery('jp')">↺ Reset</button>
+          </div>
         </div>
       </div>
 
       <div id="jp-vocab" class="tab-content">
+        <div class="vocab-search-row">
+          <input type="text" id="jp-vocab-search" placeholder="Search hiragana, romaji, or English..." oninput="filterVocab()" />
+        </div>
         <table class="vocab-table">
           <thead><tr><th>Hiragana</th><th>Romaji</th><th>English</th></tr></thead>
           <tbody id="jp-vocab-body"></tbody>
@@ -55,6 +82,10 @@
       </div>
 
       <div id="jp-quiz" class="tab-content">
+        <div class="quiz-mode-row">
+          <label><input type="radio" name="jp-quiz-mode" value="kana-to-romaji" checked onchange="restartJpQuiz()"> Kana → Romaji</label>
+          <label><input type="radio" name="jp-quiz-mode" value="romaji-to-kana" onchange="restartJpQuiz()"> Romaji → Kana</label>
+        </div>
         <div class="quiz-box">
           <p class="quiz-question" id="jp-quiz-q"></p>
           <div class="quiz-options" id="jp-quiz-opts"></div>
@@ -62,6 +93,21 @@
           <button class="quiz-next-btn" onclick="nextQuiz('jp')" style="display:none" id="jp-next-btn">Next Question →</button>
         </div>
         <p class="quiz-score">Score: <span id="jp-score">0</span> / <span id="jp-total">0</span></p>
+      </div>
+
+      <div id="jp-typein" class="tab-content">
+        <div class="typein-box">
+          <p class="typein-hint">Type the romaji reading for each character.</p>
+          <p class="quiz-question" id="jp-typein-q"></p>
+          <div class="typein-input-row">
+            <input type="text" id="jp-typein-input" placeholder="e.g. ka" autocomplete="off" autocapitalize="none"
+                   onkeydown="if(event.key==='Enter') checkTypein()" />
+            <button onclick="checkTypein()">Check</button>
+          </div>
+          <div class="quiz-feedback" id="jp-typein-feedback"></div>
+          <button class="quiz-next-btn" id="jp-typein-next" onclick="nextTypein()" style="display:none">Next →</button>
+        </div>
+        <p class="quiz-score">Score: <span id="jp-typein-score">0</span> / <span id="jp-typein-total">0</span></p>
       </div>
     </section>
 
@@ -201,11 +247,23 @@
             <div class="card-front" id="ss-front"></div>
             <div class="card-back" id="ss-back"></div>
           </div>
-          <p class="flip-hint">Click card to flip</p>
+          <p class="flip-hint">Click card to flip &nbsp;|&nbsp; ← → keys to navigate &nbsp;|&nbsp; Space to flip</p>
           <div class="card-controls">
             <button onclick="prevCard('ss')">← Prev</button>
             <span id="ss-counter"></span>
             <button onclick="nextCard('ss')">Next →</button>
+          </div>
+          <div class="leitner-controls">
+            <button class="leitner-btn still" onclick="markCard('ss', false)">✗ Still Learning</button>
+            <button class="leitner-btn got" onclick="markCard('ss', true)">✓ Got It!</button>
+          </div>
+          <div class="mastery-row">
+            <div class="mastery-bar"><div class="mastery-fill" id="ss-mastery-fill"></div></div>
+            <span class="mastery-text" id="ss-mastery-text">0 mastered</span>
+          </div>
+          <div class="flashcard-extra-controls">
+            <button class="shuffle-btn" onclick="shuffleDeck('ss')">🔀 Shuffle</button>
+            <button class="reset-mastery-btn" onclick="resetMastery('ss')">↺ Reset</button>
           </div>
         </div>
       </div>
