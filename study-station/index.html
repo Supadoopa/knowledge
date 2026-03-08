@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ellie's Study Station</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>📚 Ellie's Study Station</h1>
+    <p class="subtitle">Year 7 Queensland Exam Prep</p>
+  </header>
+
+  <nav class="subject-nav">
+    <button class="nav-btn active" data-subject="japanese">🇯🇵 Japanese</button>
+    <button class="nav-btn" data-subject="english">✍️ English</button>
+    <button class="nav-btn" data-subject="maths">🔢 Maths</button>
+    <button class="nav-btn" data-subject="social">🏛️ Social Science</button>
+  </nav>
+
+  <main>
+    <!-- JAPANESE -->
+    <section id="japanese" class="subject-section active">
+      <div class="exam-badge">Exam: 25th March</div>
+      <h2>Japanese — Hiragana</h2>
+      <p class="topic-intro">Master Hiragana reading, vocabulary, and English meanings.</p>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="jp-flashcards">Flashcards</button>
+        <button class="tab-btn" data-tab="jp-vocab">Vocab List</button>
+        <button class="tab-btn" data-tab="jp-quiz">Quiz</button>
+      </div>
+
+      <div id="jp-flashcards" class="tab-content active">
+        <div class="flashcard-container">
+          <div class="flashcard" id="jp-card" onclick="flipCard('jp')">
+            <div class="card-front" id="jp-front"></div>
+            <div class="card-back" id="jp-back"></div>
+          </div>
+          <p class="flip-hint">Click card to flip</p>
+          <div class="card-controls">
+            <button onclick="prevCard('jp')">← Prev</button>
+            <span id="jp-counter"></span>
+            <button onclick="nextCard('jp')">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="jp-vocab" class="tab-content">
+        <table class="vocab-table">
+          <thead><tr><th>Hiragana</th><th>Romaji</th><th>English</th></tr></thead>
+          <tbody id="jp-vocab-body"></tbody>
+        </table>
+      </div>
+
+      <div id="jp-quiz" class="tab-content">
+        <div class="quiz-box">
+          <p class="quiz-question" id="jp-quiz-q"></p>
+          <div class="quiz-options" id="jp-quiz-opts"></div>
+          <div class="quiz-feedback" id="jp-quiz-feedback"></div>
+          <button class="quiz-next-btn" onclick="nextQuiz('jp')" style="display:none" id="jp-next-btn">Next Question →</button>
+        </div>
+        <p class="quiz-score">Score: <span id="jp-score">0</span> / <span id="jp-total">0</span></p>
+      </div>
+    </section>
+
+    <!-- ENGLISH -->
+    <section id="english" class="subject-section">
+      <div class="exam-badge">Exam: Week 9</div>
+      <h2>English — Persuasive Speech</h2>
+      <p class="topic-intro">Argue that Jack is <strong>NOT guilty</strong> of stealing from the Giant in <em>Jack and the Beanstalk</em>.</p>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="en-structure">Speech Structure</button>
+        <button class="tab-btn" data-tab="en-arguments">Key Arguments</button>
+        <button class="tab-btn" data-tab="en-techniques">Persuasive Techniques</button>
+        <button class="tab-btn" data-tab="en-builder">Speech Builder</button>
+      </div>
+
+      <div id="en-structure" class="tab-content active">
+        <div class="card-grid">
+          <div class="info-card">
+            <h3>1. Introduction</h3>
+            <ul>
+              <li>Hook: Start with a bold statement or rhetorical question</li>
+              <li>State your position clearly: <em>"Jack is not guilty."</em></li>
+              <li>Preview your three main arguments</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3>2. Body Paragraph 1</h3>
+            <ul>
+              <li>The Giant stole Jack's family's wealth first</li>
+              <li>Jack's father's belongings were taken by the Giant</li>
+              <li>Jack was simply reclaiming what was rightfully his</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3>3. Body Paragraph 2</h3>
+            <ul>
+              <li>Jack acted out of desperation to save his family from poverty</li>
+              <li>His mother and he were starving — a matter of survival</li>
+              <li>The law recognises necessity as a defence</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3>4. Body Paragraph 3</h3>
+            <ul>
+              <li>The Giant was violent, dangerous, and threatened Jack's life</li>
+              <li>"Fee fi fo fum" — the Giant intended to harm Jack</li>
+              <li>Jack acted in self-defence</li>
+            </ul>
+          </div>
+          <div class="info-card">
+            <h3>5. Conclusion</h3>
+            <ul>
+              <li>Restate your position strongly</li>
+              <li>Summarise your three arguments</li>
+              <li>Finish with a powerful call to action or statement</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div id="en-arguments" class="tab-content">
+        <div class="argument-cards" id="en-arguments-list"></div>
+      </div>
+
+      <div id="en-techniques" class="tab-content">
+        <div class="card-grid" id="en-techniques-list"></div>
+      </div>
+
+      <div id="en-builder" class="tab-content">
+        <h3>Practice Speech Builder</h3>
+        <p>Click a section to expand a writing prompt and space to draft your speech.</p>
+        <div id="speech-builder"></div>
+      </div>
+    </section>
+
+    <!-- MATHS -->
+    <section id="maths" class="subject-section">
+      <div class="exam-badge">Exam: Week 9</div>
+      <h2>Maths</h2>
+      <p class="topic-intro">Topics: Index notation, multiplication & division, square roots, factors & fractions.</p>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="ma-notes">Study Notes</button>
+        <button class="tab-btn" data-tab="ma-practice">Practice</button>
+        <button class="tab-btn" data-tab="ma-quiz">Quiz</button>
+      </div>
+
+      <div id="ma-notes" class="tab-content active">
+        <div class="card-grid" id="ma-notes-cards"></div>
+      </div>
+
+      <div id="ma-practice" class="tab-content">
+        <div class="practice-area" id="ma-practice-area"></div>
+      </div>
+
+      <div id="ma-quiz" class="tab-content">
+        <div class="quiz-box">
+          <p class="quiz-question" id="ma-quiz-q"></p>
+          <div class="quiz-options" id="ma-quiz-opts"></div>
+          <div class="quiz-feedback" id="ma-quiz-feedback"></div>
+          <button class="quiz-next-btn" onclick="nextQuiz('ma')" style="display:none" id="ma-next-btn">Next Question →</button>
+        </div>
+        <p class="quiz-score">Score: <span id="ma-score">0</span> / <span id="ma-total">0</span></p>
+      </div>
+    </section>
+
+    <!-- SOCIAL SCIENCE -->
+    <section id="social" class="subject-section">
+      <div class="exam-badge">Exam: Week 7</div>
+      <h2>Social Science — Ancient China</h2>
+      <p class="topic-intro">Topics: Han dynasty, Qin dynasty, Yellow River, Emperors and what they did.</p>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="ss-timeline">Timeline</button>
+        <button class="tab-btn" data-tab="ss-emperors">Emperors</button>
+        <button class="tab-btn" data-tab="ss-yellowriver">Yellow River</button>
+        <button class="tab-btn" data-tab="ss-flashcards">Flashcards</button>
+        <button class="tab-btn" data-tab="ss-quiz">Quiz</button>
+      </div>
+
+      <div id="ss-timeline" class="tab-content active">
+        <div class="timeline" id="ss-timeline-content"></div>
+      </div>
+
+      <div id="ss-emperors" class="tab-content">
+        <div class="card-grid" id="ss-emperors-cards"></div>
+      </div>
+
+      <div id="ss-yellowriver" class="tab-content">
+        <div class="card-grid" id="ss-yellowriver-cards"></div>
+      </div>
+
+      <div id="ss-flashcards" class="tab-content">
+        <div class="flashcard-container">
+          <div class="flashcard" id="ss-card" onclick="flipCard('ss')">
+            <div class="card-front" id="ss-front"></div>
+            <div class="card-back" id="ss-back"></div>
+          </div>
+          <p class="flip-hint">Click card to flip</p>
+          <div class="card-controls">
+            <button onclick="prevCard('ss')">← Prev</button>
+            <span id="ss-counter"></span>
+            <button onclick="nextCard('ss')">Next →</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="ss-quiz" class="tab-content">
+        <div class="quiz-box">
+          <p class="quiz-question" id="ss-quiz-q"></p>
+          <div class="quiz-options" id="ss-quiz-opts"></div>
+          <div class="quiz-feedback" id="ss-quiz-feedback"></div>
+          <button class="quiz-next-btn" onclick="nextQuiz('ss')" style="display:none" id="ss-next-btn">Next Question →</button>
+        </div>
+        <p class="quiz-score">Score: <span id="ss-score">0</span> / <span id="ss-total">0</span></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Good luck Ellie! You've got this 🌟</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
