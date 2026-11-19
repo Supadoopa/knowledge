@@ -2,6 +2,25 @@
 
 * [My Knowledge Wiki](README.md)
 
+## Personal Knowledge Hub
+
+* [Polaris](polaris/README.md)
+  * [Top of Mind](polaris/top-of-mind.md)
+  * [Life Razor](polaris/life-razor.md)
+* [Logs](logs/README.md)
+  * [2026-04-05](logs/2026-04-05.md)
+* [Commonplace](commonplace/README.md)
+  * [Example Atomic Note](commonplace/example-atomic-note.md)
+* [Outputs](outputs/README.md)
+  * [Example Draft](outputs/example-draft.md)
+* [Utilities](utilities/README.md)
+  * [Claude Workflow](utilities/claude-workflow.md)
+  * Templates
+    * [Daily Note](utilities/templates/daily-note.md)
+    * [Atomic Note](utilities/templates/atomic-note.md)
+    * [Output Draft](utilities/templates/output-draft.md)
+    * [Person Note](utilities/templates/person-note.md)
+
 ## Courses
 
 * [Courses](courses/courses.md)

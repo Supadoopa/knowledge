@@ -32,6 +32,30 @@ I share my knowledge in a longer form by writing [articles](https://medium.com/@
 
 If you found a mistake anywhere in this wiki, I would really appreciate your help. You can quickly find any entry you wish to edit by [searching for the topic](https://github.com/cedrickchee/knowledge/find/master) and then making the changes.
 
+## Personal Knowledge Hub
+
+This repository now serves a dual purpose. The original course notes (fast.ai, Coursera, books) are preserved as an archive. A personal knowledge hub layer has been added alongside them with the following structure:
+
+| Section | Purpose |
+|---------|---------|
+| [Polaris](polaris/README.md) | North star — goals, priorities, life razor |
+| [Logs](logs/README.md) | Daily scratchpad entries |
+| [Commonplace](commonplace/README.md) | Atomic notes — one idea per file |
+| [Outputs](outputs/README.md) | Drafts and published writing |
+| [Utilities](utilities/README.md) | Templates and Claude workflow |
+
+### How the hub works
+
+Notes flow through three stages:
+
+1. **Capture** → write freely in `logs/` without worrying about structure.
+2. **Distill** → promote durable ideas to `commonplace/` as atomic notes.
+3. **Express** → combine atomic notes into shareable writing in `outputs/`.
+
+`polaris/` provides the orientation layer: what you are working toward and why.
+
+See [Claude Workflow](utilities/claude-workflow.md) for prompt templates that help with each stage.
+
 ## License
 
 * Code: [MIT](https://cedrickchee.mit-license.org/) © Cedric Chee
